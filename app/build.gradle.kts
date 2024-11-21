@@ -43,6 +43,9 @@ android {
 
 dependencies {
     val roomVersion = "2.6.1"
+
+    implementation (platform("com.google.firebase:firebase-bom:32.7.2"))
+    implementation ("com.google.firebase:firebase-storage-ktx")
     
     implementation("androidx.room:room-runtime:$roomVersion")
     implementation("androidx.room:room-ktx:$roomVersion")

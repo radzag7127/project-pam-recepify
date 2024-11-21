@@ -15,6 +15,9 @@ import android.view.View
 
 class HomeActivity : AppCompatActivity() {
 
+    // Inisialisasi binding untuk mengakses view dan RecyclerView adapter untuk menampilkan resep
+    // dataList untuk resep yang ditampilkan, allRecipes untuk backup data sebelum filtering
+
     private lateinit var binding: ActivityHomeBinding
     private lateinit var rvAdapter: PopularAdapter
     private lateinit var dataList: ArrayList<Recipe>
@@ -59,6 +62,9 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+
+ // Setup RecyclerView untuk menampilkan daftar resep secara horizontal
+    // Menggunakan custom adapter PopularAdapter untuk menampilkan item resep
     private fun setupRecyclerView() {
         dataList = ArrayList()
         binding.rvPopular.layoutManager =
@@ -67,6 +73,8 @@ class HomeActivity : AppCompatActivity() {
         binding.rvPopular.adapter = rvAdapter
     }
 
+    // Setup listener untuk setiap kategori resep
+    // Menggunakan binding untuk mengakses view dan menavigasi ke kategori resep yang sesuai
     private fun setupCategoryClickListeners() {
         binding.apply {
             breakfast.setOnClickListener { navigateToCategory("Breakfast") }
@@ -76,6 +84,7 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    // Navigasi ke kategori resep yang dipilih
     private fun navigateToCategory(category: String) {
         startActivity(Intent(this, CategoryActivity::class.java).apply {
             putExtra("CATEGORY", category)
@@ -83,6 +92,7 @@ class HomeActivity : AppCompatActivity() {
         })
     }
 
+    // Memuat semua resep dari Firestore dan menampilkan di RecyclerView
     private fun loadAllRecipes() {
         binding.progressBar.visibility = View.VISIBLE
 

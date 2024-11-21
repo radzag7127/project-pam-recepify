@@ -22,6 +22,8 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var storage: FirebaseStorage
     private var selectedImageUri: Uri? = null
 
+    // Launcher untuk memilih gambar dari galeri menggunakan Activity Result API
+    // Setelah gambar dipilih, akan ditampilkan di ImageView dan disimpan di selectedImageUri
     private val imagePickerLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
@@ -63,6 +65,8 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    // Fungsi untuk memvalidasi input dari user sebelum proses registrasi
+    // Memastikan semua field terisi dan password match dengan konfirmasinya
     private fun validateInputs(email: String, password: String, confirmPassword: String, name: String): Boolean {
         if (email.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || name.isEmpty()) {
             Toast.makeText(this, "Please fill all fields", Toast.LENGTH_SHORT).show()
@@ -75,6 +79,8 @@ class RegisterActivity : AppCompatActivity() {
         return true
     }
 
+    // Fungsi untuk mendaftarkan user baru ke Firebase Authentication
+    // Jika berhasil, akan dilanjutkan dengan upload foto profil (jika ada) dan membuat profil user
     private fun registerUser(email: String, password: String) {
         binding.progressBar.visibility = View.VISIBLE
         auth.createUserWithEmailAndPassword(email, password)
@@ -94,6 +100,8 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
+    // Fungsi untuk mengupload foto profil ke Firebase Storage
+    // Setelah upload berhasil, URL foto akan disimpan di profil user
     private fun uploadProfileImage(userId: String, email: String) {
         val imageRef = storage.reference.child("profile_images/$userId.jpg")
         imageRef.putFile(selectedImageUri!!)
@@ -113,6 +121,8 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
+    // Fungsi untuk membuat profil user baru di Firestore
+    // Menyimpan data user seperti email, nama, foto profil, dan bio
     private fun createUserProfile(userId: String, email: String, profilePicUrl: String) {
         val userProfile = UserProfile(
             userId = userId,
