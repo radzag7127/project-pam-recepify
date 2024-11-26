@@ -16,6 +16,9 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private val firestore = Firebase.firestore
 
+    //Menginisialisasi binding untuk mengakses view di layout XML secara type-safe
+    // Menghindari findViewById dan null pointer exception dengan sistem binding yang lebih aman
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -39,6 +42,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+
+    // Memastikan user berhasil login dan objek user dari Firebase Auth tidak null
+    // Safety check wajib sebelum mengakses data user untuk menghindari crash aplikasi
+
     private fun loginUser(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
@@ -56,6 +63,10 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
     }
+
+
+    // Membuat profil default untuk user baru yang belum memiliki data di Firestore
+    // Mengisi data minimal seperti nama dari email dan field kosong untuk foto dan bio
 
     private fun createDefaultProfileIfNeeded(userId: String, email: String) {
         val userRef = Firebase.firestore.collection("users").document(userId)

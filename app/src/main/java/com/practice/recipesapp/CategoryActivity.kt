@@ -12,7 +12,7 @@ import com.practice.recipesapp.model.CloudRecipe
 
 class CategoryActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityCategoryBinding
+    private lateinit var binding: ActivityCategoryBinding 
     private lateinit var rvAdapter: PopularAdapter
     private lateinit var dataList: ArrayList<Recipe>
 

@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="29" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -14,27 +19,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RecipesApp"
         tools:targetApi="31">
+
+        <!-- Activity untuk detail resep -->
         <activity
             android:name=".RecipeActivity"
             android:exported="false" />
+
+        <!-- Activity untuk kategori resep -->
         <activity
             android:name=".CategoryActivity"
             android:exported="false" />
+
+        <!-- Activity untuk pencarian resep -->
         <activity
             android:name=".SearchActivity"
             android:exported="false" />
+
+        <!-- Activity untuk halaman utama -->
         <activity
             android:name=".HomeActivity"
             android:exported="false" />
+
+        <!-- Activity untuk login -->
         <activity
             android:name=".LoginActivity"
             android:exported="true">
+
+            <!-- Intent filter untuk menentukan activity sebagai launcher atau WAJIB login dulu -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Activity untuk halaman utama -->
         <activity
             android:name=".MainActivity"
             android:exported="false" />
